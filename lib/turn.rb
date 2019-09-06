@@ -6,29 +6,41 @@ def display_board(board = [" ", " ", " ", " ", " ", " ", " ", " ", " "])
   puts " #{board[6]} | #{board[7]} | #{board[8]} "
 end
 
-def index_to_input(input)
-  input.to_i - 1
+def input_to_index(user_input)
+  index = user_input.to_i
+  index -= 1
+  return index
 end
 
-def valid_move?(board, index, character = "X")
-  if [index].between?(0,8) && board[index] == " " || board[index] == ""
+def valid_move?(board, index)
+  if index.between?(0,8) == TRUE && position_taken? == FALSE
     return TRUE
-  else if board[index] == "X" || board[index] == "O"
+  else
     return FALSE
   end
 
+def position_taken?(board, index)
+  if board[index] == " " || board[index] == "" || board[index] == nil
+    return FALSE
+  else
+    return TRUE
+  end
+end
+
 def move(board, index, character = "X")
   board[index] = character
+  return board
 end
   
 def turn(board)
   puts "Please enter 1-9:"
-  input = gets.strip
-  index = index_to_input(input)
-  if valid.move?(board, index)
-    move(board, index)
-    display_board(board)
-  else
-  turn(board)
+  answer = gets.strip
+  index = input_to_index(answer)
+    if valid_move?(board, index) == TRUE
+      move(board, index)
+      display_board(board)
+    else
+    turn(board)
+end
 end
 end
